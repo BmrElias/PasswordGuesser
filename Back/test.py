@@ -96,12 +96,7 @@ if leet == 'y':
 
 monthname = input('Do you want to convert month name? (y/n) ')
 if monthname == 'y':
-    for idx in range(0, len(words)):
-        words_day_combinated.append(
-            words[idx] + month_name(date_value.strftime('%m')))
-        words_day_combinated.append(month_name(
-            date_value.strftime('%m')) + words[idx])
-    words.extend(words_monthname_combinated)
+    words.append(month_name(date_value.strftime('%m')))
 
 
 # print("words : ", words)
