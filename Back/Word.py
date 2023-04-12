@@ -1,60 +1,39 @@
 class Word:
-    def __init__(self):
-        self.words = []
-        self.words_uppercase = []
-        self.words_camelcase = []
-        self.words_leet = []
-        self.words_without_accent = []
-        self.wordsPossibilities = []
 
+    @staticmethod
     def leet_speak(word):
-        word = word.replace('a', '4')
-        word = word.replace('e', '3')
-        word = word.replace('i', '1')
-        word = word.replace('o', '0')
-        word = word.replace('l', '1')
-        word = word.replace('s', '5')
-        word = word.replace('b', '8')
-        word = word.replace('t', '7')
-        word = word.replace('z', '2')
-        word = word.replace('g', '6')
+        leet_chars = {
+            'a': '4',
+            'e': '3',
+            'i': '1',
+            'o': '0',
+            'l': '1',
+            's': '5',
+            'b': '8',
+            't': '7',
+            'z': '2',
+            'g': '6'
+        }
+        for leet_char, replacement_char in leet_chars.items():
+            word = word.replace(leet_char, replacement_char)
         return word
 
+    @staticmethod
     def remove_accents(word):
-        word = word.replace('é', 'e')
-        word = word.replace('è', 'e')
-        word = word.replace('ê', 'e')
-        word = word.replace('à', 'a')
-        word = word.replace('â', 'a')
-        word = word.replace('ù', 'u')
-        word = word.replace('û', 'u')
-        word = word.replace('î', 'i')
-        word = word.replace('ï', 'i')
-        word = word.replace('ô', 'o')
-        word = word.replace('ö', 'o')
-        word = word.replace('ç', 'c')
+        accents = {
+            'é': 'e',
+            'è': 'e',
+            'ê': 'e',
+            'à': 'a',
+            'â': 'a',
+            'ù': 'u',
+            'û': 'u',
+            'î': 'i',
+            'ï': 'i',
+            'ô': 'o',
+            'ö': 'o',
+            'ç': 'c'
+        }
+        for accented_char, replacement_char in accents.items():
+            word = word.replace(accented_char, replacement_char)
         return word
-
-    def upper_case(self):
-        for word in self.words:
-            self.words_uppercase.append(word.upper())
-
-    def camel_case(self):
-        for word in self.words:
-            self.words_camelcase.append(word.capitalize())
-
-    def lower_case(self):
-        for word in self.words:
-            self.words_lower.append(word.lower())
-
-    def leet_speak(self):
-        for word in self.words:
-            self.words_leet.append(self.leet_speak(word))
-
-    def without_accent(self):
-        for word in self.words:
-            self.words_without_accent.append(self.remove_accents(word))
-
-    def possibilities(self):
-        self.wordsPossibilities = self.words + self.words_uppercase + \
-            self.words_camelcase + self.words_leet + self.words_without_accent

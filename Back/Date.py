@@ -1,34 +1,50 @@
+import datetime
+
+
 class Date:
     def __init__(self):
-        self.dates = []
-        self.datesPossibilities = []
+        self.value = datetime.datetime.now()
 
-    def getDay(self, date):
-        return date.split('/')[0]
+    def get_year(self, short=False):
+        return self.value.strftime('%y' if short else '%Y')
 
-    def getMonth(self, date):
-        return date.split('/')[1]
+    def get_month_number(self):
+        return self.value.strftime('%m')
 
-    def getYear(self, date):
-        return date.split('/')[2]
+    def get_month_name(self, language='en'):
+        month_names = {
+            'en':
+                {
+                    '01': 'January',
+                    '02': 'February',
+                    '03': 'March',
+                    '04': 'April',
+                    '05': 'May',
+                    '06': 'June',
+                    '07': 'July',
+                    '08': 'August',
+                    '09': 'September',
+                    '10': 'October',
+                    '11': 'November',
+                    '12': 'December'
+                },
+            'fr':
+                {
+                    '01': 'janvier',
+                    '02': 'février',
+                    '03': 'mars',
+                    '04': 'avril',
+                    '05': 'mai',
+                    '06': 'juin',
+                    '07': 'juillet',
+                    '08': 'août',
+                    '09': 'septembre',
+                    '10': 'octobre',
+                    '11': 'novembre',
+                    '12': 'décembre'
+                }
+        }
+        return month_names.get(language, {}).get(self.get_month_number(), self.get_month_number())
 
-    def getMonthName(self, date):
-        month = self.getMonth(date)
-        month = month.replace('01', 'janvier')
-        month = month.replace('02', 'fevrier')
-        month = month.replace('03', 'mars')
-        month = month.replace('04', 'avril')
-        month = month.replace('05', 'mai')
-        month = month.replace('06', 'juin')
-        month = month.replace('07', 'juillet')
-        month = month.replace('08', 'aout')
-        month = month.replace('09', 'septembre')
-        month = month.replace('10', 'octobre')
-        month = month.replace('11', 'novembre')
-        month = month.replace('12', 'decembre')
-        return month
-
-    def twoDigitYear(self, date):
-        return date[2:]
-
-    
+    def get_day(self):
+        return self.value.strftime('%d')
