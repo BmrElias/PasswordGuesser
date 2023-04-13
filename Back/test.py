@@ -1,134 +1,208 @@
-import datetime
-
-date_value = datetime.datetime.now()
-
-words = ['Aà', 'bb', 'éè']
-
-words_uppercase = []
-words_camelcase = []
-words_combinated = []
-words_without_accent = []
-
-words_leet = []
-
-words_year_combinated = []
-words_month_combinated = []
-words_monthname_combinated = []
-words_day_combinated = []
+from datetime import datetime
 
 
+def replace_chars(char_type, word):
+    char_dict = {
+        'leet': {
+            'a': '4', 'e': '3', 'i': '1', 'o': '0', 'l': '1', 's': '5', 'b': '8', 't': '7', 'z': '2', 'g': '6'
+        },
+        'accent': {
+            'é': 'e', 'è': 'e', 'ê': 'e', 'à': 'a', 'â': 'a', 'ù': 'u', 'û': 'u', 'î': 'i', 'ï': 'i', 'ô': 'o', 'ö': 'o', 'ç': 'c'
+        }
+    }
+
+    if char_type not in char_dict:
+        return [word]
+
+    all_combinations = [[]]
+    for char in word:
+        if char.lower() in char_dict[char_type]:
+            new_combinations = []
+            for combo in all_combinations:
+                new_combinations.append(combo + [char])
+                new_combinations.append(
+                    combo + [char_dict[char_type][char.lower()]])
+            all_combinations = new_combinations
+        else:
+            for combo in all_combinations:
+                combo.append(char)
+
+    replaced_words = []
+    for combination in all_combinations:
+        replaced_words.append(''.join(combination))
+
+    return replaced_words
+
+
+def month_name(language, date):
+    month_names = {
+        'en': {
+            '1': 'January', '2': 'February', '3': 'March', '4': 'April', '5': 'May', '6': 'June', '7': 'July', '8': 'August', '9': 'September', '10': 'October', '11': 'November', '12': 'December'
+        },
+        'fr': {
+            '1': 'janvier', '2': 'février', '3': 'mars', '4': 'avril', '5': 'mai', '6': 'juin', '7': 'juillet', '8': 'août', '9': 'septembre', '10': 'octobre', '11': 'novembre', '12': 'décembre'
+        }
+    }
+
+    toReturn = []
+
+    month = str(date.month)
+
+    if language in month_names:
+        toReturn.append(month_names[language][month])
+    elif language == 'both':
+        toReturn.append(month_names['en'][month])
+        toReturn.append(month_names['fr'][month])
+    else:
+        return
+
+    return toReturn
+
+
+def special_characters():
+    special_chars = input('Do you want to add special characters? (y/n) ')
+    if special_chars == 'y':
+        special_chars = input(
+            'Do you want to add all special characters or common ones? (all/common) ')
+        return add_special_characters(special_chars)
+    return []
+
+
+def add_special_characters(special_chars):
+    if special_chars == 'all':
+        return ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+', '[', ']', '{', '}', '|', '\\', ';', ':', '"', "'", ',', '<', '.', '>', '/', '?']
+    elif special_chars == 'common':
+        return ['.', '$', '?',        '!', '*']
+    return []
+
+
+def generate_combinations(list1, list2, max_list2):
+    count = 0
+    start_time = datetime.now()
+    for i in range(2, min(5, len(list1) + len(list2)) + 1):
+        for comb2_len in range(min(i, len(list2)) + 1):
+            for comb2 in combinations_with_replacement(list2, comb2_len):
+                comb1_len = i - comb2_len
+                for comb1 in permutations_with_replacement(list1, comb1_len):
+                    num_list2 = sum(1 for x in comb1 + comb2 if x in list2)
+                    if num_list2 <= max_list2:
+                        combination = ''.join(comb1 + comb2)
+                        print(combination)
+                        count += 1
+
+    duration = datetime.now() - start_time
+    print('Nombre de résultats: ' + str(count))
+    print('Temps de calcul: ' + str(duration))
+
+
+def combinations_with_replacement(lst, k):
+    if k == 0:
+        yield []
+    else:
+        for i, item in enumerate(lst):
+            for combo in combinations_with_replacement(lst[i:], k - 1):
+                yield [item] + combo
+
+
+def permutations_with_replacement(lst, k):
+    if k == 0:
+        yield []
+    else:
+        for i in range(len(lst)):
+            for combo in permutations_with_replacement(lst, k - 1):
+                yield [lst[i]] + combo
+
+
+def permutations_with_replacement(lst, k):
+    if k == 0:
+        yield []
+    else:
+        for i in range(len(lst)):
+            for combo in permutations_with_replacement(lst, k - 1):
+                yield [lst[i]] + combo
+
+
+base_words = ['dan', 'élias']
+date_value = [datetime(year=2023, month=4, day=13)]
+
+primary_words = base_words.copy()
 result = []
 
-
-def remove_accents(word):
-    word = word.replace('é', 'e')
-    word = word.replace('è', 'e')
-    word = word.replace('ê', 'e')
-    word = word.replace('à', 'a')
-    word = word.replace('â', 'a')
-    word = word.replace('ù', 'u')
-    word = word.replace('û', 'u')
-    word = word.replace('î', 'i')
-    word = word.replace('ï', 'i')
-    word = word.replace('ô', 'o')
-    word = word.replace('ö', 'o')
-    word = word.replace('ç', 'c')
-    return word
-
-
-def leet_speak(word):
-    word = word.replace('a', '4')
-    word = word.replace('e', '3')
-    word = word.replace('i', '1')
-    word = word.replace('o', '0')
-    word = word.replace('l', '1')
-    word = word.replace('s', '5')
-    word = word.replace('b', '8')
-    word = word.replace('t', '7')
-    word = word.replace('z', '2')
-    word = word.replace('g', '6')
-    return word
-
-
-def month_name(month):
-    month = month.replace('01', 'janvier')
-    month = month.replace('02', 'fevrier')
-    month = month.replace('03', 'mars')
-    month = month.replace('04', 'avril')
-    month = month.replace('05', 'mai')
-    month = month.replace('06', 'juin')
-    month = month.replace('07', 'juillet')
-    month = month.replace('08', 'aout')
-    month = month.replace('09', 'septembre')
-    month = month.replace('10', 'octobre')
-    month = month.replace('11', 'novembre')
-    month = month.replace('12', 'decembre')
-    return month
+for date in date_value:
+    result.append(str(date.day) + '-' +
+                  str(date.month) + '-' + str(date.year))
+    result.append(str(date.year) + '-' +
+                  str(date.month) + '-' + str(date.day))
+    result.append(str(date.month) + '-' + str(date.year))
+    result.append(str(date.year))
+    result.append(str(date.month))
+    result.append(str(date.day))
+monthname = input('Do you want to convert month name? (y/n) ')
+if monthname == 'y':
+    language = input('Which language? (en/fr/both) ')
+    for date in date_value:
+        base_words.extend(month_name(language, date))
+        result.append(str(date.day) + '-' +
+                      str(date.month) + '-' + str(date.year))
+        result.append(str(date.year) + '-' +
+                      str(date.month) + '-' + str(date.day))
+        result.append(str(date.month) + '-' + str(date.year))
+        result.append(str(date.year))
+        result.append(str(date.year)[-2:])
+        result.append(str(date.month))
+        result.append(str(date.day))
 
 
 lowercase = input('Do you want to convert your word to lowercase? (y/n) ')
 if lowercase == 'y':
-    for idx in range(len(words)):
-        words[idx] = words[idx].lower()
+    for word in base_words:
+        primary_words.append(word.lower())
 
 accents = input('Do you want to remove accents? (y/n) ')
 if accents == 'y':
-    for idx in range(len(words)):
-        words[idx] = remove_accents(words[idx])
+    for word in base_words:
+        primary_words.extend(replace_chars('accent', word))
 
 uppercase = input('Do you want to convert your word to uppercase? (y/n) ')
 if uppercase == 'y':
-    for word in words:
-        words_uppercase.append(word.upper())
-    words.extend(words_uppercase)
+    for word in base_words:
+        primary_words.append(word.upper())
 
 camelcase = input('Do you want to convert your word to camelcase? (y/n) ')
 if camelcase == 'y':
-    for word in words:
-        words_camelcase.append(word.capitalize())
-    words.extend(words_camelcase)
+    for word in base_words:
+        primary_words.append(word.capitalize())
+
+
+primary_words = list(dict.fromkeys(primary_words))
+
+result.extend(primary_words)
+
 
 leet = input('Do you want to convert your word to leet speak? (y/n) ')
 if leet == 'y':
-    for word in words:
-        words_leet.append(leet_speak(word))
-    words.extend(words_leet)
+    for word in primary_words:
+        result.extend(replace_chars('leet', word))
 
-monthname = input('Do you want to convert month name? (y/n) ')
-if monthname == 'y':
-    words.append(month_name(date_value.strftime('%m')))
-
-
-# print("words : ", words)
-
-for idx in range(0, len(words)):
-    for idx2 in range(0, len(words)):
-        if idx != idx2:
-            words_combinated.append(words[idx] + words[idx2])
-
-# print("combinaisons des mots : ", words_combinated)
-
-for idx in range(0, len(words)):
-    words_year_combinated.append(words[idx] + str(date_value.year))
-    words_year_combinated.append(str(date_value.year) + words[idx])
-
-# print("combinaisons des mots avec l'année : ", words_year_combinated)
-
-for idx in range(0, len(words)):
-    words_month_combinated.append(words[idx] + str(date_value.month))
-    words_month_combinated.append(str(date_value.month) + words[idx])
-
-# print("combinaisons des mots avec le mois : ", words_month_combinated)
-
-for idx in range(0, len(words)):
-    words_day_combinated.append(words[idx] + str(date_value.day))
-    words_day_combinated.append(str(date_value.day) + words[idx])
-
-# print("combinaisons des mots avec le jour : ", words_day_combinated)
+if uppercase == 'y' and accents == 'y':
+    for word in primary_words:
+        result.extend(replace_chars('maj_accent', word))
+if uppercase == 'y' and leet == 'y':
+    for word in primary_words:
+        result.extend(replace_chars('maj_leet', word))
 
 
-result = words + words_uppercase + words_combinated + words_year_combinated + \
-    words_month_combinated + words_monthname_combinated + \
-    words_day_combinated + words_leet
+special_characters_list = special_characters()
 
-print("résultat : ", result)
+
+if special_characters_list:
+    nb_special_characters = int(input(
+        'How many special characters do you want to add? (0-3) '))
+    if nb_special_characters < 0:
+        nb_special_characters = 0
+    elif nb_special_characters > 3:
+        nb_special_characters = 3
+else:
+    nb_special_characters = 0
+
+generate_combinations(result, special_characters_list, nb_special_characters)

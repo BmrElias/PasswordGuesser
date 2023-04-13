@@ -3,21 +3,24 @@ import string
 
 
 class SpecialCharacters:
-    @staticmethod
-    def get_chars(chars):
-        if chars == 'all':
+    @classmethod
+    def get_chars(cls, options):
+        if options['special_characters'] == 'all':
             return string.punctuation
+        elif options['special_characters'] == 'common':
+            return '.$?!*'
         else:
-            return chars
+            return ''
 
-    @staticmethod
-    def add_chars(passwords, chars, num_chars):
-        if not chars:
+    @classmethod
+    def add_chars(cls, passwords, special_chars, num_special_chars):
+        if special_chars == '':
             return passwords
         result = []
         for password in passwords:
+            num_chars = random.randint(0, num_special_chars)
             for i in range(num_chars):
                 pos = random.randint(0, len(password))
                 result.append(password[:pos] +
-                              random.choice(chars) + password[pos:])
+                              random.choice(special_chars) + password[pos:])
         return result
