@@ -5,7 +5,8 @@ Cours POO MDS M1 Dev
 ## Installation
 
 ```bash
-git clone
+git clone https://github.com/BmrElias/PasswordGuesser.git
+cd PasswordGuesser/app
 ```
 
 ## Usage
