@@ -15,7 +15,7 @@ cd PasswordGuesser/app
 python run.py
 ```
 
-### Techniques de POO
+## Techniques de POO
 
 -   **Polymorphisme**
 
