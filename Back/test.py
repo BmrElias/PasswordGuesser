@@ -8,7 +8,13 @@ def replace_chars(char_type, word):
         },
         'accent': {
             'é': 'e', 'è': 'e', 'ê': 'e', 'à': 'a', 'â': 'a', 'ù': 'u', 'û': 'u', 'î': 'i', 'ï': 'i', 'ô': 'o', 'ö': 'o', 'ç': 'c'
-        }
+        },
+        'maj_accent': {
+            'É': 'E', 'È': 'E', 'Ê': 'E', 'À': 'A', 'Â': 'A', 'Ù': 'U', 'Û': 'U', 'Î': 'I', 'Ï': 'I', 'Ô': 'O', 'Ö': 'O', 'Ç': 'C'
+        },
+        'maj_leet': {
+            'A': '4', 'E': '3', 'I': '1', 'O': '0', 'L': '1', 'S': '5', 'B': '8', 'T': '7', 'Z': '2', 'G': '6'
+        },
     }
 
     if char_type not in char_dict:
@@ -79,6 +85,9 @@ def add_special_characters(special_chars):
 def generate_combinations(list1, list2, max_list2):
     count = 0
     start_time = datetime.now()
+
+    combinations = set()
+
     for i in range(2, min(5, len(list1) + len(list2)) + 1):
         for comb2_len in range(min(i, len(list2)) + 1):
             for comb2 in combinations_with_replacement(list2, comb2_len):
@@ -87,8 +96,12 @@ def generate_combinations(list1, list2, max_list2):
                     num_list2 = sum(1 for x in comb1 + comb2 if x in list2)
                     if num_list2 <= max_list2:
                         combination = ''.join(comb1 + comb2)
-                        print(combination)
-                        count += 1
+                        # Ajouter la combinaison à l'ensemble
+                        combinations.add(combination)
+
+    for combination in combinations:
+        print(combination)
+        count += 1
 
     duration = datetime.now() - start_time
     print('Nombre de résultats: ' + str(count))
@@ -113,17 +126,17 @@ def permutations_with_replacement(lst, k):
                 yield [lst[i]] + combo
 
 
-def permutations_with_replacement(lst, k):
-    if k == 0:
-        yield []
-    else:
-        for i in range(len(lst)):
-            for combo in permutations_with_replacement(lst, k - 1):
-                yield [lst[i]] + combo
+base_words = input('Enter base words separated by spaces: ').split()
+num_date = input('Do you want to add dates? (y/n) ')
+if num_date == 'y':
+    num_date = int(input('How many dates? '))
+    date_value = []
+    for i in range(num_date):
+        date = input('Enter date (dd/mm/yyyy): ')
+        date_value.append(datetime.strptime(date, '%d/%m/%Y'))
+else:
+    date_value = []
 
-
-base_words = ['dan', 'élias']
-date_value = [datetime(year=2023, month=4, day=13)]
 
 primary_words = base_words.copy()
 result = []
