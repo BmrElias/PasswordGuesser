@@ -48,13 +48,13 @@ python3 run.py
 
 -   **Polymorphisme**
 
-    -   Le polymorphisme est une caractéristique de la POO qui permet à une classe ou à une méthode d'avoir plusieurs formes. En pratique, cela signifie qu'une seule interface peut être utilisée pour représenter différents types de données.
+    -   Le polymorphisme est une caractéristique de la programmation orientée objet (POO) qui permet à une méthode ou une classe d'avoir plusieurs formes. Cela signifie qu'une même méthode ou classe peut se comporter différemment en fonction de son contexte.
 
     -   L'interface [GeneratorInterface](app/generator_interface.py) définit une méthode [generate()](https://github.com/BmrElias/PasswordGuesser/blob/b0de661119e95673ddaa07a253fd9e31e66f7879/app/generator_interface.py#L6) que chaque classe qui l'implémente (par exemple, [PrimaryWordsGenerator](https://github.com/BmrElias/PasswordGuesser/blob/b0de661119e95673ddaa07a253fd9e31e66f7879/app/primary_word_generator.py#L15) et [LeetSpeakGenerator](https://github.com/BmrElias/PasswordGuesser/blob/b0de661119e95673ddaa07a253fd9e31e66f7879/app/leet_speak_generator.py#L10) doit définir, chacune avec un comportement différent. C'est une forme de polymorphisme.
 
 -   **Encapsulation**
 
-    -   L'encapsulation est le mécanisme qui permet de restreindre l'accès direct à certains composants d'un objet et de protéger les données internes de l'objet. C'est une manière de regrouper les données (attributs) et les méthodes qui les manipulent.
+    -   L'encapsulation est le mécanisme qui regroupe les données (attributs) et les méthodes qui manipulent ces données en une seule unité, appelée classe. C'est une façon de cacher les détails de mise en œuvre et de protéger les données d'un accès direct.
 
     -   Les détails de l'implémentation de chaque classe sont cachés à l'utilisateur de la classe. Par exemple, dans la classe [Date](app/date_generator.py), la façon dont le format de la date est converti est cachée à l'utilisateur de cette classe, qui n'a qu'à appeler la méthode `get_formatted_date()` (exemple dans [Main](https://github.com/BmrElias/PasswordGuesser/blob/9d3b7e4c0516e89ce95d15bd93db99d6083391c8/app/main.py#L55C34-L55C52)) pour obtenir une date formatée.
 
