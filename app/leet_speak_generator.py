@@ -14,6 +14,9 @@ class LeetSpeakGenerator(GeneratorInterface):
         if leet == "y":
             for word in self.primary_words:
                 self.result.extend(self.replace_chars("leet", word))
+        else:
+            self.result = self.primary_words
+
         pass
 
     def replace_chars(self, char_type, word):
