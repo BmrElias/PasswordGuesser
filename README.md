@@ -29,7 +29,7 @@ python3 run.py
 
     -   Le polymorphisme est une caractéristique de la POO qui permet à une classe ou à une méthode d'avoir plusieurs formes. En pratique, cela signifie qu'une seule interface peut être utilisée pour représenter différents types de données.
 
-    -   L'interface [GeneratorInterface](app/generator_interface.py) définit une méthode [generate()](https://github.com/BmrElias/PasswordGuesser/blob/c2ccb0e92369867015c521bde9832b20c7fe51b6/app/generator_interface.py#L6C6-L6C6) que chaque classe qui l'implémente (par exemple, [PrimaryWordsGenerator](app/primary_word_generator.py) et [LeetSpeakGenerator](app/leet_speak_generator.py)) doit définir, chacune avec un comportement différent. C'est une forme de polymorphisme.
+    -   L'interface [GeneratorInterface](app/generator_interface.py) définit une méthode [generate()](https://github.com/BmrElias/PasswordGuesser/blob/c2ccb0e92369867015c521bde9832b20c7fe51b6/app/generator_interface.py#L6C6-L6C6) que chaque classe qui l'implémente (par exemple, [PrimaryWordsGenerator]([app/primary_word_generator.py](https://github.com/BmrElias/PasswordGuesser/blob/7c22d8b0f1bfa37ad8acbe57496417cc9707598a/app/primary_word_generator.py#L15)) et [LeetSpeakGenerator]([app/leet_speak_generator.py](https://github.com/BmrElias/PasswordGuesser/blob/7c22d8b0f1bfa37ad8acbe57496417cc9707598a/app/leet_speak_generator.py#L10))) doit définir, chacune avec un comportement différent. C'est une forme de polymorphisme.
 
 -   **Encapsulation**
 
@@ -47,7 +47,7 @@ python3 run.py
 
     -   L'héritage est une caractéristique de la POO qui permet de créer une nouvelle classe à partir d'une classe existante. La nouvelle classe hérite des attributs et méthodes de la classe parente, et peut également ajouter de nouveaux attributs et méthodes ou redéfinir ceux de la classe parente.
 
-    -   Bien que cet exemple ne montre pas un exemple direct d'héritage (c'est-à-dire une classe qui hérite d'une autre classe), il utilise l'héritage de classes intégrées comme ABC pour créer des interfaces.
+    -   Bien que cet exemple ne montre pas un exemple direct d'héritage (c'est-à-dire une classe qui hérite d'une autre classe), il utilise l'héritage de classes intégrées comme [ABC](https://github.com/BmrElias/PasswordGuesser/blob/7c22d8b0f1bfa37ad8acbe57496417cc9707598a/app/generator_interface.py#L4) pour créer des interfaces.
 
 -   **Interface**
 
@@ -59,13 +59,13 @@ python3 run.py
 
     -   En POO, chaque objet d'une classe a ses propres attributs (qui sont essentiellement des variables associées à l'objet) et des méthodes (qui sont essentiellement des fonctions associées à l'objet). Ces attributs et méthodes peuvent être utilisés pour manipuler l'état de l'objet.
 
-    -   La plupart des classes utilisent des méthodes et des attributs d'objets. Par exemple, dans la classe [Main](app/main.py), run() est une méthode d'instance et base_words, date_values, primary_words sont des attributs d'instance.
+    -   La plupart des classes utilisent des méthodes et des attributs d'objets. Par exemple, dans la classe [Main](app/main.py), [run()]([https://github.com/BmrElias/PasswordGuesser/blob/7c22d8b0f1bfa37ad8acbe57496417cc9707598a/app/main.py#L121](https://github.com/BmrElias/PasswordGuesser/blob/7c22d8b0f1bfa37ad8acbe57496417cc9707598a/app/main.py#L20)) est une méthode d'instance et [base_words, date_values, primary_words](https://github.com/BmrElias/PasswordGuesser/blob/7c22d8b0f1bfa37ad8acbe57496417cc9707598a/app/main.py#L21C9-L23C32) sont des attributs d'instance.
 
 -   **Méthodes et attributs statiques**
 
     -   Les méthodes et attributs statiques sont définis au niveau de la classe, et non au niveau de l'instance. Les méthodes statiques ne peuvent pas accéder ou modifier les attributs d'instance, tandis que les attributs statiques sont partagés par toutes les instances de la classe.
 
-    -   [CombinationsGenerator](app/combinations_generator.py) utilise des méthodes statiques, comme generate_combinations(), combinations_with_replacement(), etc. Les méthodes statiques sont des méthodes qui appartiennent à la classe et non à une instance de la classe. Elles sont généralement utilisées pour créer des méthodes utilitaires. De même, la classe [SpecialCharacters](app/special_characters.py) utilise une méthode statique add_special_characters().
+    -   [CombinationsGenerator](app/combinations_generator.py) utilise des méthodes statiques, comme [combinations_with_replacement()](https://github.com/BmrElias/PasswordGuesser/blob/7c22d8b0f1bfa37ad8acbe57496417cc9707598a/app/combinations_generator.py#L3) et [permutations_with_replacement()](https://github.com/BmrElias/PasswordGuesser/blob/7c22d8b0f1bfa37ad8acbe57496417cc9707598a/app/combinations_generator.py#L14). Les méthodes statiques sont des méthodes qui appartiennent à la classe et non à une instance de la classe. Elles sont généralement utilisées pour créer des méthodes utilitaires. De même, la classe [SpecialCharacters](app/special_characters.py) utilise une méthode statique [add_special_characters()](https://github.com/BmrElias/PasswordGuesser/blob/7c22d8b0f1bfa37ad8acbe57496417cc9707598a/app/special_characters.py#L3).
 
 -   **Méthodes et attributs de classe**
 
