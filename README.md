@@ -56,7 +56,7 @@ python3 run.py
 
     -   L'encapsulation est le mécanisme qui permet de restreindre l'accès direct à certains composants d'un objet et de protéger les données internes de l'objet. C'est une manière de regrouper les données (attributs) et les méthodes qui les manipulent.
 
-    -   Les détails de l'implémentation de chaque classe sont cachés à l'utilisateur de la classe. Par exemple, dans la classe [Date](app/date_generator.py), la façon dont le format de la date est converti est cachée à l'utilisateur de cette classe, qui n'a qu'à appeler la méthode `get_formatted_date()` pour obtenir une date formatée.
+    -   Les détails de l'implémentation de chaque classe sont cachés à l'utilisateur de la classe. Par exemple, dans la classe [Date](app/date_generator.py), la façon dont le format de la date est converti est cachée à l'utilisateur de cette classe, qui n'a qu'à appeler la méthode `get_formatted_date()` (exemple dans [Main](https://github.com/BmrElias/PasswordGuesser/blob/9d3b7e4c0516e89ce95d15bd93db99d6083391c8/app/main.py#L55C34-L55C52)) pour obtenir une date formatée.
 
 -   **Composition**
 
