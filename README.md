@@ -29,7 +29,7 @@ python3 run.py
 
     -   Le polymorphisme est une caractéristique de la POO qui permet à une classe ou à une méthode d'avoir plusieurs formes. En pratique, cela signifie qu'une seule interface peut être utilisée pour représenter différents types de données.
 
-    -   L'interface [GeneratorInterface](app/generator_interface.py) définit une méthode generate() que chaque classe qui l'implémente (par exemple, [PrimaryWordsGenerator](app/primary_word_generator.py) et [LeetSpeakGenerator](app/leet_speak_generator.py)) doit définir, chacune avec un comportement différent. C'est une forme de polymorphisme.
+    -   L'interface [GeneratorInterface](app/generator_interface.py) définit une méthode [generate()](https://github.com/BmrElias/PasswordGuesser/blob/c2ccb0e92369867015c521bde9832b20c7fe51b6/app/generator_interface.py#L6C6-L6C6) que chaque classe qui l'implémente (par exemple, [PrimaryWordsGenerator](app/primary_word_generator.py) et [LeetSpeakGenerator](app/leet_speak_generator.py)) doit définir, chacune avec un comportement différent. C'est une forme de polymorphisme.
 
 -   **Encapsulation**
 
